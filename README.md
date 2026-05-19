@@ -77,5 +77,3 @@ while (timeFromUser === null || timeFromUser.trim() === "" || Number(timeFromUse
 
 Proudly designed and engineered with clean code architecture by **ibnJabr** 💻.
 *Feel free to fork this project, open issues, or drop a star ⭐ if you find it helpful!*
-
-```
