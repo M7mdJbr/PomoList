@@ -28,7 +28,7 @@ const startTimer = () => {
   if (timerInterval !== null) return;
 
   if (timeLeft === 0) {
-    let timeFromUser = fetchingtime.value;
+    let timeFromUser = Math.abs(fetchingtime.value);
     let minutesInput = Number(timeFromUser) || 25;
     timeLeft = minutesInput * 60;
   }
@@ -55,7 +55,7 @@ pauseTimer = () => {
 
 resetTimer = () => {
   pauseTimer();
-  userTime = fetchingtime.value
+  userTime = Math.abs(fetchingtime.value);
   timeLeft =  userTime * 60;
   updateDisplay();
 };
