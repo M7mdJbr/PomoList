@@ -29,9 +29,9 @@ updateDisplay = () => {
   timer.textContent = `${minString}:${secString}`;
 
   if (timerInterval !== null) {
-    document.title = `(${minString}:${secString}) PomoJabr`;
+    document.title = `(${minString}:${secString}) PomoList`;
   } else {
-    document.title = "PomoJabr";
+    document.title = "PomoList";
   }
 };
 
