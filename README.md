@@ -1,4 +1,4 @@
-⏱️ Pomojabr (Focus Timer & To-Do List)
+⏱️ PomoList (Focus Timer & To-Do List)
 A retro pixel-styled productivity dashboard that combines a customizable Pomodoro Focus Timer with a dynamic To-Do List. Built with a vibrant cyberpunk neon aesthetic, featuring glowing animations and responsive layouts for both desktop and mobile users.
 
 This is my very 1st JavaScript project, built to master DOM manipulation, browser events, asynchronous intervals, and array data handling.
