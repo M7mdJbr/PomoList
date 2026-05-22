@@ -41,4 +41,4 @@ State Synchronicity: Engineered task state updates using mapping and filtering p
 Robust Audio Controls: Implemented .currentTime = 0 prior to calling .play() to allow immediate, rapid audio retriggers without lagging behind fast user clicks.
 
 Credits
-Made with passion and without ☕ by ibnJabr (https://github.com/ibnjabr)
+Made with passion and without ☕ by M7mdJbr (https://github.com/M7mdJbr)
