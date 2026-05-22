@@ -204,4 +204,13 @@ document.addEventListener("keydown", (e) => {
   }
 });
 
+todoInput.addEventListener("keydown", (e) => {
+  if (e.key === "Enter" && !e.shiftKey) {
+    
+    e.preventDefault(); 
+    
+    addTodo(); 
+  }
+});
+
 renderTodos();
