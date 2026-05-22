@@ -1,7 +1,14 @@
+
 let fetchingtime = document.querySelector(".user-time");
 
-let timeLeft = 0;
+let customTime = localStorage.getItem("pomoCusTime");
+let savedTimeLeft = localStorage.getItem("pomoTimeLeft");
+
+let timeLeft = savedTimeLeft ? Number(savedTimeLeft) : (customTime ? Number(customTime) * 60 : 25 * 60);
 let timerInterval = null;
+
+if (customTime) fetchingtime.value = customTime;
+
 
 const timer = document.querySelector(".time-display");
 const start = document.querySelector(".start");
@@ -39,10 +46,13 @@ const startTimer = () => {
     timeLeft = minutesInput * 60;
   }
 
+  let timeToSave = Number(fetchingtime.value) || 25;
+  localStorage.setItem("pomoCusTime", timeToSave); 
+  
   const startTime = Date.now();
   const endTime = startTime + timeLeft * 1000;
 
-  timerInterval = setInterval(() => {
+  timerInterval = setInterval(() => { 
     const now = Date.now();
     const remainingTimeInMs = endTime - now;
 
@@ -53,6 +63,9 @@ const startTimer = () => {
       updateDisplay();
       clearInterval(timerInterval);
       timerInterval = null;
+
+      localStorage.removeItem("pomoTimeLeft");
+
       document.title = "Time's up! 🔔"; 
       alarmSound.currentTime = 0;
       alarmSound.play();
@@ -68,11 +81,17 @@ pauseTimer = () => {
     clearInterval(timerInterval);
     timerInterval = null;
   }
+
+  localStorage.setItem("pomoTimeLeft", timeLeft);
 };
 
 resetTimer = () => {
   pauseTimer();
-  userTime = Math.abs(fetchingtime.value);
+  localStorage.removeItem("pomoTimeLeft");
+  let userTime = Number(fetchingtime.value) || 25;
+
+  localStorage.setItem("pomoCusTime", userTime);
+
   timeLeft =  userTime * 60;
   updateDisplay();
 };
@@ -92,7 +111,11 @@ const todoInput = document.querySelector("#todo-input");
 const addBtn = document.querySelector(".add");
 const todoList = document.querySelector(".todo-list");
 
-let todos = [];
+let todos = JSON.parse(localStorage.getItem("todos")) || [];
+
+const saveTodos = () => {
+  localStorage.setItem("todos",JSON.stringify(todos))
+}
 
 const addTodo = () => {
   const taskText = todoInput.value.trim();
@@ -106,6 +129,7 @@ const addTodo = () => {
     clickSound.currentTime = 0;
     clickSound.play();
     todos.push(newTodo);
+    saveTodos();
     todoInput.value = "";
     renderTodos();
   }
@@ -134,6 +158,7 @@ const renderTodos = () => {
 
 const deleteTodo = (id) => {
   todos = todos.filter((todo) => todo.id !== Number(id));
+  saveTodos();
   renderTodos();
 };
 
@@ -152,9 +177,31 @@ todoList.addEventListener("click", (e) => {
       }
       return todo;
     });
-
+    saveTodos()
     clickSound.currentTime = 0;
     clickSound.play();
     renderTodos();
   }
 });
+
+document.addEventListener("keydown", (e) => {
+  if (e.code === "Space") {
+    
+    if (document.activeElement === todoInput || document.activeElement === fetchingtime) {
+      return; 
+    }
+
+    e.preventDefault();
+
+    clickSound.currentTime = 0;
+    clickSound.play();
+
+    if (timerInterval !== null) {
+      pauseTimer();
+    } else {
+      startTimer();
+    }
+  }
+});
+
+renderTodos();
