@@ -318,14 +318,12 @@ footer span:hover{
     background-color:initial;
     color: var(--text-muted);
     border:0;
-    margin-left: 5px;
+    padding: 10px;
     font-size: 20px;
     cursor: pointer;
     transition: all 0.5s ease;
 }
 .edit-btn:hover{
-    padding: 2px;
+    color:#2ecc71;
 }
-.edit-btn:active{
-    padding: 3px;
-}
+
